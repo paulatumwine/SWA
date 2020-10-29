@@ -36,10 +36,7 @@ public class ProductService {
 
     public void setStock(String productNumber, int quantity, String locationCode) {
         Product product = productRepository.findById(productNumber).orElseThrow();
-        if (product.getStock() == null)
-            product.setStock(new Stock(quantity, locationCode));
-        else
-            product.setStock(new Stock(product.getStock().getNumberInStock() + quantity, locationCode));
+        product.setStock(new Stock(product.getStock().getNumberInStock() + quantity, locationCode));
         productRepository.save(product);
     }
 }
