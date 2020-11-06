@@ -26,7 +26,7 @@ public class CartController {
         return new ResponseEntity<>(cartService.getCart(cartId), HttpStatus.OK);
     }
 
-    @PatchMapping("cartId/{cartId}/productNumber/{productNumber}/quantity/{quantity}")
+    @PostMapping("{cartId}/{productNumber}/{quantity}")
     public ResponseEntity addToCart(@PathVariable String cartId,
                                     @PathVariable String productNumber, @PathVariable Integer quantity) {
         cartService.addToCart(cartId, productNumber, quantity);
