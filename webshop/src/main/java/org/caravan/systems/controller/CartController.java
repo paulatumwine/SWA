@@ -43,4 +43,10 @@ public class CartController {
         cartService.deleteCart(cartId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PostMapping("{cartId}")
+    public ResponseEntity checkout(@PathVariable String cartId) {
+        cartService.checkout(cartId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

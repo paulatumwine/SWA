@@ -20,6 +20,9 @@ public class CartService {
     @Autowired
     ProductRepository productRepository;
 
+    @Autowired
+    OrderService orderService;
+
     public List<Cart> getCarts() {
         return cartRepository.findAll();
     }
@@ -47,5 +50,10 @@ public class CartService {
 
     public void deleteCart(String isbn) {
         cartRepository.deleteById(isbn);
+    }
+
+    public void checkout(String cartId) {
+        Cart cart = cartRepository.findById(cartId).orElseThrow();
+        orderService.createOrder(cart);
     }
 }
