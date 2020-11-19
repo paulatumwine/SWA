@@ -34,4 +34,14 @@ public class ProductCatalogService {
 			productRepository.save(product);
 		}		
 	}
+	public void setStock(String productNumber, Integer quantity) {
+        Optional<Product> result = productRepository.findById(productNumber);
+        if (result.isPresent()) {
+            Product product = result.get();
+            if (product.getStock() != null) {
+                product.getStock().updateQuantity(quantity);
+                productRepository.save(product);
+            }
+        }
+    }
 }
