@@ -14,15 +14,24 @@
     <channel id="inputChannel"/>
     <channel id="outputChannel"/>
 
+    <router method="route" input-channel="outputChannel">
+        <beans:bean class="integration.OrderRouter" />
+    </router>
+
     <service-activator input-channel="inputChannel"
                        output-channel="outputChannel"
                        ref="warehouseService"
                        method="print"/>
 
-    <service-activator input-channel="outputChannel"
-                       ref="shippingService"
+    <service-activator input-channel="normalShippingChannel"
+                       ref="normalShippingService"
+                       method="print"/>
+
+    <service-activator input-channel="nextDayShippingChannel"
+                       ref="nextDayShippingService"
                        method="print"/>
 
   <beans:bean id="warehouseService" class="integration.WarehouseService"/>
-    <beans:bean id="shippingService" class="integration.ShippingService"/>
+    <beans:bean id="normalShippingService" class="integration.NormalShippingService"/>
+    <beans:bean id="nextDayShippingService" class="integration.NextDayShippingService"/>
 </beans:beans>

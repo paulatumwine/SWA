@@ -2,9 +2,9 @@ package integration;
 
 public class Order {
     String ordernumber;
-    Double amount;
+    double amount;
 
-    public Order(String ordernumber, Double amount) {
+    public Order(String ordernumber, double amount) {
         this.ordernumber = ordernumber;
         this.amount = amount;
     }
@@ -17,11 +17,11 @@ public class Order {
         this.ordernumber = ordernumber;
     }
 
-    public Double getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
