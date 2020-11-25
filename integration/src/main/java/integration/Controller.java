@@ -1,6 +1,5 @@
 package integration;
 
-import java.time.LocalTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
@@ -15,11 +14,11 @@ public class Controller {
 	@Autowired
 	private GreetingGateway gateway;
 	
-	@RequestMapping("/greeting/{name}")
-	public String getGreeting(@PathVariable("name") String name) {
-		Message<String> helloMessage =  MessageBuilder.withPayload(name.toUpperCase()).build();
-
-		String result = gateway.handleRequest(helloMessage);
+	@RequestMapping("/order")
+	public Order getGreeting() {
+        Order order = new Order("H-234-X56",600.65);
+        Message<Order> orderMessage =  MessageBuilder.withPayload(order).build();
+		Order result = gateway.handleRequest(orderMessage);
 		return result;
 	}
 }

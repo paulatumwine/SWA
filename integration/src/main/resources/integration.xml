@@ -11,12 +11,18 @@
         http://www.springframework.org/schema/integration/spring-integration.xsd">
 
 
-  <channel id="inputChannel"/>
+    <channel id="inputChannel"/>
+    <channel id="outputChannel"/>
 
-  <service-activator input-channel="inputChannel"
-                     ref="helloService"
-                     method="sayHello"/>
+    <service-activator input-channel="inputChannel"
+                       output-channel="outputChannel"
+                       ref="warehouseService"
+                       method="print"/>
 
-  <beans:bean id="helloService" class="integration.HelloService"/>
+    <service-activator input-channel="outputChannel"
+                       ref="shippingService"
+                       method="print"/>
 
+  <beans:bean id="warehouseService" class="integration.WarehouseService"/>
+    <beans:bean id="shippingService" class="integration.ShippingService"/>
 </beans:beans>
