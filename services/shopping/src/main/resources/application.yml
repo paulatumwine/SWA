@@ -1,18 +1,3 @@
 spring:
-  data:
-    mongodb:
-      host: localhost
-      port: 27017
-      database: testdb
-
-server:
-  port: 8093
-
-logging:
-  level:
-    root: ERROR
-#    org:
-#      springframework.: ERROR
-
-customersURL: http://localhost:8092
-productsURL: http://localhost:8091
+  application:
+    name: shopping-service
