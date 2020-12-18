@@ -1,6 +1,7 @@
 package edu.miu.cs.cs590.customerservice;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ public class CustomerController {
         return account;
     }
 
+    @RibbonClient(name="AccountService")
     @FeignClient("AccountService")
     interface AccountFeignClient {
         @RequestMapping("/account/{customerid}")
