@@ -1,0 +1,3 @@
+spring:
+  application:
+#    name: CustomerService #this doesn't seem to be picked up from this file!
