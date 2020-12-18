@@ -1,6 +1,6 @@
 spring:
-  application:
-    name: ServiceB
+#  application:
+#    name: ServiceB
   cloud:
     config:
       url: http://localhost:8888
