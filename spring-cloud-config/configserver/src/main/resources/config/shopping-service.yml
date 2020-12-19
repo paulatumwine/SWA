@@ -16,3 +16,8 @@ logging:
 
 customersURL: http://localhost:8092
 productsURL: http://localhost:8091
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
