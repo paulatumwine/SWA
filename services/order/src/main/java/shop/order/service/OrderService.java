@@ -10,7 +10,7 @@ import shop.order.domain.OrderConfirmedEvent;
 import shop.order.domain.OrderFactory;
 import shop.order.domain.OrderLine;
 import shop.order.domain.ProductSoldEvent;
-import shop.order.integration.CustomerProxy;
+import shop.order.integration.CustomerFeignClient;
 import shop.order.integration.EmailSender;
 import shop.order.integration.Logger;
 import shop.order.repository.OrderRepository;
@@ -21,7 +21,7 @@ public class OrderService {
 	@Autowired
 	OrderRepository orderRepository;
 	@Autowired
-	CustomerProxy customerProxy;
+    CustomerFeignClient customerProxy;
 	@Autowired
 	EmailSender emailSender;
 	@Autowired

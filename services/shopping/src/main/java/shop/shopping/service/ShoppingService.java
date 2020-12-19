@@ -10,13 +10,13 @@ import shop.shopping.domain.Product;
 import shop.shopping.domain.ShoppingCart;
 import shop.shopping.domain.ShoppingCartCheckedOutEvent;
 import shop.shopping.integration.OrderProxy;
-import shop.shopping.integration.ProductCatalogProxy;
+import shop.shopping.integration.ProductCatalogFeignClient;
 import shop.shopping.repository.ShoppingCartRepository;
 
 @Service
 public class ShoppingService {
 	@Autowired
-	ProductCatalogProxy productCatalogProxy;
+    ProductCatalogFeignClient productCatalogProxy;
 	@Autowired
 	ShoppingCartRepository shoppingCartRepository;
 	@Autowired
