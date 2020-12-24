@@ -1,3 +1,39 @@
+server:
+  port: 8080
+
 spring:
   application:
     name: zuul-service
+  zipkin:
+    base-url: http://localhost:9411/
+  sleuth:
+    sampler:
+      probability: 1 #100% (default = 10%)
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+
+zuul:
+  routes:
+    customers:
+      serviceId: customers-service
+    product:
+      serviceId: product-service
+    order:
+      serviceId: order-service
+    shopping:
+      serviceId: shopping-service
+  host:
+    connect-timeout-millis: -1 # defaults to 2s
+    socket-timeout-millis: -1 # default to 10s
+
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false
