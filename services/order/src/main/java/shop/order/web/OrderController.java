@@ -1,5 +1,7 @@
 package shop.order.web;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,29 +22,35 @@ import shop.order.service.ShoppingCartDTO;
 public class OrderController {
 	@Autowired
 	OrderService orderService;
-	
-	
+
+    @HystrixCommand(fallbackMethod = "returnEmptyOrder", commandProperties = {
+            @HystrixProperty(name="execution.isolation.thread.timeoutInMilliseconds", value="2000")
+    })
 	@GetMapping("/order/{orderNumber}")
 	public ResponseEntity<?> getCart(@PathVariable String orderNumber) {
 		OrderDTO orderDTO  = orderService.getOrder(orderNumber);
 		return new ResponseEntity<OrderDTO>(orderDTO, HttpStatus.OK);
 	}
-	
+
+	public ResponseEntity<?> returnEmptyOrder(String orderNumber) {
+        return new ResponseEntity<OrderDTO>(new OrderDTO(), HttpStatus.OK);
+    }
+
 	@PostMapping("/order/{orderNumber}")
 	public void confirm(@PathVariable String orderNumber) {
 		orderService.confirm(orderNumber);
 	}
-	
+
 	@PostMapping("/order/setCustomer/{orderNumber}/{customerNumber}")
 	public ResponseEntity<?> SetCustomer(@PathVariable String orderNumber,@PathVariable String customerNumber) {
 		orderService.setCustomer(orderNumber,customerNumber);
 		OrderDTO orderDTO  = orderService.getOrder(orderNumber);
 		return new ResponseEntity<OrderDTO>(orderDTO, HttpStatus.OK);
 	}
-	
+
 	@PostMapping("/order/create")
-	public void createOrder(@RequestBody ShoppingCartDTO shoppingCartDTO) {	
+	public void createOrder(@RequestBody ShoppingCartDTO shoppingCartDTO) {
 		orderService.createOrder(shoppingCartDTO);
 	}
-	
+
 }

@@ -30,6 +30,7 @@ public class OrderService {
 	private ApplicationEventPublisher publisher;
 
 	public OrderDTO getOrder(String orderNumber) {
+        OrderCustomerDTO customerDTO = customerProxy.getOrderCustomer("1"); // testing circuit breaking
 		Optional<Order> optOrder = orderRepository.findById(orderNumber);
 		if (optOrder.isPresent()) {
 			return OrderAdapter.getOrderDTO(optOrder.get());
